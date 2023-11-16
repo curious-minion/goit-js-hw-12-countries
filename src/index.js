@@ -32,8 +32,14 @@ function onInputChange(e) {
             createCountryCard(data);
         }
 
-        if (data.length >= 2 && data.length <= 10) {
-            createCountriesList(data);
+      if (data.length >= 2 && data.length <= 10) {
+
+        function filterByValue(array, string) {
+        return array.filter(el =>el.name.common.toLowerCase().includes(string.toLowerCase()));
+        }
+        const filteredValues = filterByValue(data, searchQuery);
+        console.log(filteredValues);
+        createCountriesList(filteredValues);
         }
 
         if (data.length > 10) {
@@ -41,7 +47,7 @@ function onInputChange(e) {
             errorMessage('Too many matches found. Please enter more specific query!')
         }
     });
-        
+
 }
 
 function errorMessage(message) {
